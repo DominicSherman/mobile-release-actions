@@ -48,7 +48,7 @@ export const createGithubTag = async ({
       repo,
       tag_name: newTag,
       target_commitish: branchToTag,
-      name: `Release ${newTag}`,
+      name: newTag,
       body,
     }),
     method: 'POST',
