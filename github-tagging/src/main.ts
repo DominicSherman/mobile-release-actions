@@ -53,9 +53,10 @@ const createTag = async () => {
         const commitSinceTagUrl = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/compare/${mostRecentTag}...HEAD`;
         const commitsSinceTagResponse = await fetch(commitSinceTagUrl, {headers});
         const commitSinceTagData = await commitsSinceTagResponse.json();
+        const commits = commitSinceTagData.commits || [];
 
         // generate list of commit messages for release body
-        const commitMessages = (commitSinceTagData || []).commits.map((item) =>
+        const commitMessages = commits.map((item) =>
             `* ${item.commit.message} ${item.html_url} - @${item.author.login}`
         );
 
