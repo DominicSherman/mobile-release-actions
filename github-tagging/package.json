@@ -6,6 +6,11 @@
   "repository": "git@github.com:DominicSherman/react-native-tagging-action.git",
   "author": "Dominic Sherman <dominic.sherman98@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "package": "ncc build --source-map --license licenses.txt",
+    "ci:package": "yarn build && yarn package"
+  },
   "dependencies": {
     "@actions/core": "^1.5.0",
     "@actions/github": "^5.0.0",
