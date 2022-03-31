@@ -8,7 +8,8 @@ const main = async (): Promise<void> => {
   const githubAuthToken = core.getInput('github-auth-token');
   const branchToTag = core.getInput('branch-to-tag') || 'main';
   const versionChangeType = validateVersionChangeType(core.getInput('version-change-type'));
-  const currentTag = getCurrentTag();
+
+  const currentTag = await getCurrentTag(githubAuthToken);
   const newTag = getNewTag({
     currentTag,
     versionChangeType,

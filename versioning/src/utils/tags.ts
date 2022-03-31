@@ -1,11 +1,12 @@
 import { VersionChangeType } from '../types';
+import { getMostRecentGithubTag } from './github';
 
 // TAG - v1.0.0-1
 // VERSION - 1.0.0
 
-export const getCurrentTag = (): string => {
+export const getCurrentTag = (githubAuthToken: string): Promise<string> => {
   // TODO pull from GitHub or app.json?
-  return 'v0.0.1-0';
+  return getMostRecentGithubTag(githubAuthToken);
 };
 
 /**
