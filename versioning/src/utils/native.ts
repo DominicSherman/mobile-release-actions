@@ -1,13 +1,9 @@
 import path from 'path';
 import fs from 'fs';
-import xcode from 'pbxproj-dom/xcode';
+import { Xcode } from 'pbxproj-dom/xcode';
 import plist from 'plist';
-import _ from 'lodash';
+import { uniq as unique, flattenDeep } from 'lodash';
 import { getVersionFromTag } from './tags';
-
-const Xcode = xcode.Xcode;
-const unique = _.uniq;
-const flattenDeep = _.flattenDeep;
 
 const IOS_DIR = path.join(__dirname, 'ios');
 const BUILD_GRADLE_PATH = path.join(__dirname, 'android/app/build.gradle');
