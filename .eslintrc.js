@@ -4,10 +4,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'jest'],
-  extends: [
-    'eslint:recommended',
-    'plugin:jest/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:jest/recommended', 'plugin:prettier/recommended'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -15,7 +12,7 @@ module.exports = {
       parserOptions: {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
-      }
-    }
-  ]
-}
+      },
+    },
+  ],
+};

@@ -1,4 +1,4 @@
-name: release
+name: checks
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - v*
 
 jobs:
-  release:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,5 +17,6 @@ jobs:
           node-version: 16
           cache: yarn
       - run: yarn
+      - run: yarn workspaces run lint
+      - run: yarn workspaces run test
       - run: yarn workspaces run ci:package
-      - uses: int128/release-typescript-action@v1

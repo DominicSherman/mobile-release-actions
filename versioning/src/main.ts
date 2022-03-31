@@ -43,9 +43,12 @@ const main = async (): Promise<void> => {
   };
 
   // get existing tags
-  const tagsResponse = await fetch(`${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/tags`, {
-    headers,
-  });
+  const tagsResponse = await fetch(
+    `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/tags`,
+    {
+      headers,
+    }
+  );
   const tagsData = await tagsResponse.json();
 
   // default if the repository doesn't have any tags created yet
@@ -63,7 +66,9 @@ const main = async (): Promise<void> => {
   const commits = commitSinceTagData.commits || [];
 
   // generate list of commit messages for release body
-  const commitMessages = commits.map((item: CommitItem) => `* ${item.commit.message} ${item.html_url} - @${item.author.login}`);
+  const commitMessages = commits.map(
+    (item: CommitItem) => `* ${item.commit.message} ${item.html_url} - @${item.author.login}`
+  );
 
   // break version out from version count (v1.0.0-1 -> v1.0.0 and 1)
   const [tagVersion, tagVersionNumber] = mostRecentTag.split('-');
