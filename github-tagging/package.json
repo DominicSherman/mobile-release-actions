@@ -2,7 +2,7 @@
   "name": "react-native-tagging-action",
   "version": "1.0.0",
   "description": "An action for automating react native versions",
-  "main": "index.js",
+  "main": "lib/src/main.js",
   "repository": "git@github.com:DominicSherman/react-native-tagging-action.git",
   "author": "Dominic Sherman <dominic.sherman98@gmail.com>",
   "license": "MIT",
