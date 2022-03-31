@@ -58,5 +58,5 @@ export const updateEasAppJson = async ({
     },
   };
 
-  await fs.writeFile('eas.json', JSON.stringify(json));
+  await fs.writeFile(`${process.env.GITHUB_WORKSPACE}/eas.json`, JSON.stringify(json));
 };
