@@ -13,9 +13,6 @@ inputs:
   android-expo-deploy-key-path:
     description: 'Path to the Expo deploy key'
     required: true
-  android-submit-track:
-    description: 'Android submit track'
-    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

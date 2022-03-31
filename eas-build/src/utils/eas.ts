@@ -5,7 +5,6 @@ interface UpdateEasJsonProps {
   appleAscAppId: string;
   appleTeamId: string;
   androidExpoDeployKeyPath: string;
-  androidSubmitTrack: string;
 }
 
 export const updateEasAppJson = async ({
@@ -13,7 +12,6 @@ export const updateEasAppJson = async ({
   appleAscAppId,
   appleTeamId,
   androidExpoDeployKeyPath,
-  androidSubmitTrack,
 }: UpdateEasJsonProps): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const easJson = require(`${process.env.GITHUB_WORKSPACE}/eas.json`);
@@ -31,7 +29,7 @@ export const updateEasAppJson = async ({
       },
       android: {
         serviceAccountKeyPath: androidExpoDeployKeyPath,
-        track: androidSubmitTrack,
+        track: 'beta',
       },
     },
     production: {
@@ -42,7 +40,7 @@ export const updateEasAppJson = async ({
       },
       android: {
         serviceAccountKeyPath: androidExpoDeployKeyPath,
-        track: androidSubmitTrack,
+        track: 'production',
       },
     },
   };

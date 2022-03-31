@@ -6,14 +6,12 @@ const main = async (): Promise<void> => {
   const appleAscAppId = core.getInput('apple-asc-app-id');
   const appleTeamId = core.getInput('apple-team-id');
   const androidExpoDeployKeyPath = core.getInput('android-expo-deploy-key-path');
-  const androidSubmitTrack = core.getInput('android-submit-track');
 
   await updateEasAppJson({
     appleId,
     appleAscAppId,
     appleTeamId,
     androidExpoDeployKeyPath,
-    androidSubmitTrack,
   });
 };
 
