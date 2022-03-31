@@ -1,19 +1,24 @@
 {
-  "name": "react-native-tagging-action",
-  "version": "1.0.0",
+  "name": "versioning",
+  "version": "0.0.0",
   "description": "An action for automating react native versions",
   "main": "lib/main.js",
-  "repository": "git@github.com:DominicSherman/react-native-tagging-action.git",
-  "author": "Dominic Sherman <dominic.sherman98@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "ci:package": "yarn build && yarn package",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "lint": "eslint **/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "ci:package": "yarn build && yarn package"
+    "test": "jest"
   },
   "dependencies": {
     "@actions/core": "^1.5.0",
     "@actions/github": "^5.0.0",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.1"
   }
 }

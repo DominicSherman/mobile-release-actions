@@ -1,18 +1,13 @@
 {
-  "name": "typescript-action",
+  "name": "mobile-release-actions",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Monorepo of GitHub actions used for mobile release",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/actions/typescript-action.git"
   },
-  "keywords": [
-    "actions",
-    "node",
-    "setup"
-  ],
-  "author": "",
+  "author": "echobind",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "1.6.0"

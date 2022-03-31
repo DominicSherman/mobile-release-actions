@@ -1,9 +1,6 @@
 name: release
 
 on:
-  pull_request:
-    paths:
-      - .github/workflows/release.yaml
   push:
     branches:
       - main
@@ -20,5 +17,8 @@ jobs:
           node-version: 16
           cache: yarn
       - run: yarn
+      - run: yarn workspaces run lint
+      - run: yarn workspaces run format-check
+      - run: yarn workspaces run test
       - run: yarn workspaces run ci:package
       - uses: int128/release-typescript-action@v1
