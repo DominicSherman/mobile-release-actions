@@ -14,7 +14,7 @@ export const updateEasAppJson = async ({
   buildVersion,
 }: UpdateEasJsonProps): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const easJson = require('eas.json');
+  const easJson = require(`${process.env.GITHUB_WORKSPACE}/eas.json`);
 
   const newVersion = getVersionFromTag(newTag);
   const json = {
