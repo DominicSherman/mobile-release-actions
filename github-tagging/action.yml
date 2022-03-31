@@ -14,4 +14,4 @@ inputs:
     default: 'none'
 runs:
   using: 'node16'
-  main: 'lib/main.js'
+  main: 'dist/index.js'
