@@ -2,11 +2,11 @@ const fetch = require('node-fetch');
 const core = require('@actions/core');
 
 /**
- * Bump version based on version change typ
+ * Bump version based on version change type
  * @param {string} tag ex: 1.0.0
  * @returns updated version (ex: 2.0.0)
  */
-const getNewTag = (tag) => {
+const getNewTag = tag => {
     // get input from github action, default to 'none'
     const versionChangeType = core.getInput('version-change-type') || 'none';
 
@@ -55,7 +55,7 @@ const createTag = async () => {
         const commitSinceTagData = await commitsSinceTagResponse.json();
 
         // generate list of commit messages for release body
-        const commitMessages = commitSinceTagData.commits.map((item) =>
+        const commitMessages = (commitSinceTagData || []).commits.map((item) =>
             `* ${item.commit.message} ${item.html_url} - @${item.author.login}`
         );
 
