@@ -6,15 +6,16 @@ describe('tags', () => {
     const currentTag = 'v1.0.0-1';
 
     it.each([
-      ['major', 'v2.0.0-1'],
-      ['minor', 'v1.1.0-1'],
-      ['patch', 'v1.0.1-1'],
+      ['major', 'v2.0.0-2'],
+      ['minor', 'v1.1.0-2'],
+      ['patch', 'v1.0.1-2'],
       ['none', 'v1.0.0-2'],
     ])('should handle %s version bumps', (type, newTag) => {
       expect(
         getNewTag({
           currentTag,
           versionChangeType: type as VersionChangeType,
+          buildVersion: '2',
         })
       ).toEqual(newTag);
     });
