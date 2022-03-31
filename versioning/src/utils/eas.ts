@@ -9,7 +9,10 @@ interface UpdateEasJsonProps {
   buildVersion: string;
 }
 
-export const updateEasAppJson = async ({ newTag }: UpdateEasJsonProps): Promise<void> => {
+export const updateEasAppJson = async ({
+  newTag,
+  buildVersion,
+}: UpdateEasJsonProps): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const easJson = require('eas.json');
 
@@ -22,13 +25,12 @@ export const updateEasAppJson = async ({ newTag }: UpdateEasJsonProps): Promise<
 
   json.build.base.env = {
     ...(json.build.base.env || {}),
-    APP_VERSION: process.env.APP_VERSION,
-    BUILD_VERSION: process.env.BUILD_VERSION,
+    APP_VERSION: newVersion,
+    BUILD_VERSION: buildVersion,
   };
 
   // add lane specific env vars
   LANES.forEach((lane) => {
-    // when active, OTA updates will only be used for patch releases
     const releaseChannel = `${lane}-${majorVersion}-${minorVersion}`;
     json.build[lane].releaseChannel = releaseChannel;
   });

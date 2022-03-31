@@ -8,7 +8,7 @@ import { getVersionFromTag } from './tags';
 const IOS_DIR = path.join(process.env.GITHUB_WORKSPACE || '', 'ios');
 const BUILD_GRADLE_PATH = path.join(process.env.GITHUB_WORKSPACE || '', 'android/app/build.gradle');
 // minimum build number that has been release on the Play Store. This must always increment.
-const MIN_BUILD_VERSION = 401000010; //This is the production version 4.1.0 on google play as of 1/10/2022
+const MIN_BUILD_VERSION = 1; //This is the production version 4.1.0 on google play as of 1/10/2022
 
 interface WriteBuildAndAppVersionProps {
   newTag: string;
