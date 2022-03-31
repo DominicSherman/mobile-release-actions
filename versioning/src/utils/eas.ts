@@ -23,7 +23,7 @@ export const updateEasAppJson = async ({
 
   const [majorVersion, minorVersion, _patchVersion] = newVersion.split('.');
 
-  // do we need this?
+  // do we need
   // json.build.base.env = {
   //   ...(json.build.base.env || {}),
   //   APP_VERSION: newVersion,
@@ -33,7 +33,10 @@ export const updateEasAppJson = async ({
   // add lane specific env vars
   LANES.forEach((lane) => {
     const releaseChannel = `${lane}-${majorVersion}-${minorVersion}`;
-    json.build[lane].releaseChannel = releaseChannel;
+    json.build[lane] = {
+      ...(json.build[lane] || {}),
+      releaseChannel,
+    };
   });
 
   json.submit = {
