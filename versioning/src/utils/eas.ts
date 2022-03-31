@@ -23,11 +23,12 @@ export const updateEasAppJson = async ({
 
   const [majorVersion, minorVersion, _patchVersion] = newVersion.split('.');
 
-  json.build.base.env = {
-    ...(json.build.base.env || {}),
-    APP_VERSION: newVersion,
-    BUILD_VERSION: buildVersion,
-  };
+  // do we need this?
+  // json.build.base.env = {
+  //   ...(json.build.base.env || {}),
+  //   APP_VERSION: newVersion,
+  //   BUILD_VERSION: buildVersion,
+  // };
 
   // add lane specific env vars
   LANES.forEach((lane) => {
