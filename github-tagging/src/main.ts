@@ -6,7 +6,7 @@ const core = require('@actions/core');
  * @param {string} tag ex: 1.0.0
  * @returns updated version (ex: 2.0.0)
  */
-const getNewTag = tag => {
+const getNewTag = (tag) => {
     // get input from github action, default to 'none'
     const versionChangeType = core.getInput('version-change-type') || 'none';
 
