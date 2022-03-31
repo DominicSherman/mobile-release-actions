@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 
 import { createGithubTag } from './utils/github';
-import { getCurrentTag, getNewTag, getVersionFromTag } from './utils/tags';
+import { getCurrentTag, getNewTag } from './utils/tags';
 import { validateVersionChangeType } from './utils/validation';
 
 const main = async (): Promise<void> => {
@@ -13,7 +13,6 @@ const main = async (): Promise<void> => {
     currentTag,
     versionChangeType,
   });
-  // const newVersion = getVersionFromTag(newTag);
 
   await createGithubTag({
     githubAuthToken,
