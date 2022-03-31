@@ -2,7 +2,7 @@
   "name": "versioning",
   "version": "0.0.0",
   "description": "An action for automating react native versions",
-  "main": "lib/main.js",
+  "main": "lib/src/main.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
