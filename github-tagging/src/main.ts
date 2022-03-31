@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const core = require('@actions/core');
 
 /**
- * Bump version based on version change type
+ * Bump version based on version change typ
  * @param {string} tag ex: 1.0.0
  * @returns updated version (ex: 2.0.0)
  */
