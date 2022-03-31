@@ -1,9 +1,6 @@
 import fs from 'fs/promises';
 import { getVersionFromTag } from './tags';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const easJson = require('eas.json');
-
 // const PLATFORMS = ['ios', 'android'];
 const LANES = ['alpha', 'beta', 'production'];
 
@@ -13,6 +10,9 @@ interface UpdateEasJsonProps {
 }
 
 export const updateEasAppJson = async ({ newTag }: UpdateEasJsonProps): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const easJson = require('eas.json');
+
   const newVersion = getVersionFromTag(newTag);
   const json = {
     ...easJson,
