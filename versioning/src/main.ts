@@ -10,7 +10,7 @@ const main = async (): Promise<void> => {
   const githubAuthToken = core.getInput('github-auth-token');
   const branchToTag = core.getInput('branch-to-tag') || 'main';
   const versionChangeType = validateVersionChangeType(core.getInput('version-change-type'));
-  const buildVersion = core.getInput('build-version');
+  const buildVersion = core.getInput('build-version') || '1';
   const updateEas = core.getBooleanInput('update-eas');
 
   const currentTag = await getCurrentTag(githubAuthToken);
