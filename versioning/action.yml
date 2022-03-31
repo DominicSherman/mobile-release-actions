@@ -16,10 +16,6 @@ inputs:
     description: Build version
     required: true
     default: 1
-  update-eas:
-    description: 'Whether to update eas'
-    required: true
-    default: false
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -22,6 +22,7 @@ export const getVersionFromTag = (currentTag: string): string => {
 
 interface GetNewTagProps {
   currentTag: string;
+  buildVersion: string;
   versionChangeType: VersionChangeType;
 }
 
@@ -30,18 +31,22 @@ interface GetNewTagProps {
  * If there is a version bump, then reset the version number to 1
  * If there is not a version bump, then increment the version number
  */
-export const getNewTag = ({ currentTag, versionChangeType }: GetNewTagProps): string => {
-  const [tagVersion, tagVersionNumber] = currentTag.split('-');
+export const getNewTag = ({
+  currentTag,
+  versionChangeType,
+  buildVersion,
+}: GetNewTagProps): string => {
+  const [tagVersion, _currentBuildVersion] = currentTag.split('-');
   const cleanTag = tagVersion.replace('v', '');
   const [major, minor, patch] = cleanTag.split('.');
 
   if (versionChangeType === 'major') {
-    return `v${Number(major) + 1}.0.0-1`;
+    return `v${Number(major) + 1}.0.0-${buildVersion}`;
   } else if (versionChangeType === 'minor') {
-    return `v${major}.${Number(minor) + 1}.0-1`;
+    return `v${major}.${Number(minor) + 1}.0-${buildVersion}`;
   } else if (versionChangeType === 'patch') {
-    return `v${major}.${minor}.${Number(patch) + 1}-1`;
+    return `v${major}.${minor}.${Number(patch) + 1}-${buildVersion}`;
   }
 
-  return `v${cleanTag}-${Number(tagVersionNumber) + 1}`;
+  return `v${cleanTag}-${buildVersion}`;
 };

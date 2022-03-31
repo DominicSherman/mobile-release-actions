@@ -7,8 +7,6 @@ import { getVersionFromTag } from './tags';
 
 const IOS_DIR = path.join(process.env.GITHUB_WORKSPACE || '', 'ios');
 const BUILD_GRADLE_PATH = path.join(process.env.GITHUB_WORKSPACE || '', 'android/app/build.gradle');
-// minimum build number that has been release on the Play Store. This must always increment.
-const MIN_BUILD_VERSION = 1; //This is the production version 4.1.0 on google play as of 1/10/2022
 
 interface WriteBuildAndAppVersionProps {
   newTag: string;
@@ -22,14 +20,8 @@ export const writeBuildAndAppVersions = async ({
   newTag,
   buildVersion: passedBuildVersion,
 }: WriteBuildAndAppVersionProps) => {
-  // Version submitted by user in GitHub Action run
   const appVersion = getVersionFromTag(newTag);
-
-  // GitHub Action run number
-  const parsedBuildVersion = Number(passedBuildVersion) || 1;
-
-  // Note the Number() conversion above. versionCode in build.gradle MUST be an integer.
-  const buildVersion = parsedBuildVersion + MIN_BUILD_VERSION;
+  const buildVersion = Number(passedBuildVersion);
 
   await updateIOSVersions({ appVersion, buildVersion });
   await updateAndroidVersions({ appVersion, buildVersion });

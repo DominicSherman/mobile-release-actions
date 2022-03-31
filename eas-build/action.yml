@@ -1,0 +1,21 @@
+name: 'EAS Build'
+description: 'An action for automating eas build process with submit config'
+inputs:
+  apple-id:
+    description: 'Apple ID'
+    required: true
+  apple-asc-app-id:
+    description: 'Apple ASC App ID'
+    required: true
+  apple-team-id:
+    description: 'Apple team ID'
+    required: true
+  android-expo-deploy-key-path:
+    description: 'Path to the Expo deploy key'
+    required: true
+  android-submit-track:
+    description: 'Android submit track'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

@@ -1,5 +1,4 @@
 import * as core from '@actions/core';
-import { updateEasAppJson } from './utils/eas';
 
 import { createGithubTag } from './utils/github';
 import { writeBuildAndAppVersions } from './utils/native';
@@ -11,10 +10,10 @@ const main = async (): Promise<void> => {
   const branchToTag = core.getInput('branch-to-tag') || 'main';
   const versionChangeType = validateVersionChangeType(core.getInput('version-change-type'));
   const buildVersion = core.getInput('build-version') || '1';
-  const updateEas = core.getBooleanInput('update-eas');
 
   const currentTag = await getCurrentTag(githubAuthToken);
   const newTag = getNewTag({
+    buildVersion,
     currentTag,
     versionChangeType,
   });
@@ -30,13 +29,6 @@ const main = async (): Promise<void> => {
     currentTag,
     newTag,
   });
-
-  if (updateEas) {
-    await updateEasAppJson({
-      buildVersion,
-      newTag,
-    });
-  }
 };
 
 main().catch((e) => core.setFailed(e instanceof Error ? e.message : JSON.stringify(e)));
