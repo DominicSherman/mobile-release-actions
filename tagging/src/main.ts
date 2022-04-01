@@ -1,7 +1,6 @@
 import * as core from '@actions/core';
 
 import { createGithubTag } from './utils/github';
-import { writeBuildAndAppVersions } from './utils/native';
 import { getCurrentTag, getNewTag } from './utils/tags';
 import { validateVersionChangeType } from './utils/validation';
 
@@ -18,17 +17,14 @@ const main = async (): Promise<void> => {
     versionChangeType,
   });
 
-  await writeBuildAndAppVersions({
-    buildVersion,
-    newTag,
-  });
-
   await createGithubTag({
     githubAuthToken,
     branchToTag,
     currentTag,
     newTag,
   });
+
+  core.setOutput('tag', newTag);
 };
 
 main().catch((e) => core.setFailed(e instanceof Error ? e.message : JSON.stringify(e)));

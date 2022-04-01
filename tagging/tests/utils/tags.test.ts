@@ -1,4 +1,4 @@
-import { VersionChangeType } from './../../src/types';
+import { VersionChangeType } from '../../src/types';
 import { getNewTag } from '../../src/utils/tags';
 
 describe('tags', () => {

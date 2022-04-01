@@ -3,13 +3,12 @@ import fs from 'fs';
 import { Xcode } from 'pbxproj-dom/xcode';
 import plist from 'plist';
 import { uniq as unique, flattenDeep } from 'lodash';
-import { getVersionFromTag } from './tags';
 
 const IOS_DIR = path.join(process.env.GITHUB_WORKSPACE || '', 'ios');
 const BUILD_GRADLE_PATH = path.join(process.env.GITHUB_WORKSPACE || '', 'android/app/build.gradle');
 
 interface WriteBuildAndAppVersionProps {
-  newTag: string;
+  appVersion: string;
   buildVersion: string;
 }
 
@@ -17,10 +16,9 @@ interface WriteBuildAndAppVersionProps {
  * Write iOS and Android Build/App versions
  */
 export const writeBuildAndAppVersions = async ({
-  newTag,
+  appVersion,
   buildVersion: passedBuildVersion,
 }: WriteBuildAndAppVersionProps) => {
-  const appVersion = getVersionFromTag(newTag);
   const buildVersion = Number(passedBuildVersion);
 
   await updateIOSVersions({ appVersion, buildVersion });

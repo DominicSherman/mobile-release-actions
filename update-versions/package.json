@@ -1,0 +1,25 @@
+{
+  "name": "update-versions",
+  "version": "0.0.0",
+  "description": "An action for updating mobile versions",
+  "main": "lib/src/main.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "ci:package": "yarn build && yarn package",
+    "lint": "eslint **/*.ts",
+    "package": "ncc build --source-map --license licenses.txt",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@actions/github": "^5.0.0",
+    "lodash": "^4.17.21",
+    "pbxproj-dom": "^1.2.0",
+    "plist": "^3.0.5"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.181",
+    "@types/plist": "^3.0.2"
+  }
+}

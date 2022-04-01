@@ -16,6 +16,10 @@ inputs:
     description: Build version
     required: true
     default: 1
+outputs:
+  tag:
+    description: 'The tag that was created'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

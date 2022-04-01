@@ -1,0 +1,10 @@
+name: 'Update versions'
+description: 'Update native versions based on inputs'
+inputs:
+  tag:
+    description: 'Tag of the form v1.0.0-1'
+    required: true
+    
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
