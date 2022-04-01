@@ -1,7 +1,7 @@
 {
-  "name": "eas-build",
+  "name": "eas-config",
   "version": "0.0.0",
-  "description": "An action for automating eas build process with submit config",
+  "description": "An action for automating eas configuration process with submit config",
   "main": "lib/src/main.js",
   "license": "MIT",
   "scripts": {

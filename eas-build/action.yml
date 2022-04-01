@@ -1,18 +1,18 @@
 name: 'EAS Build'
-description: 'An action for automating eas build process with submit config'
+description: 'An action for handling logic when building with EAS'
 inputs:
-  apple-id:
-    description: 'Apple ID'
+  release-stage:
+    description: 'alpha, beta or production release (alpha does not upload to TestFlight)'
     required: true
-  apple-asc-app-id:
-    description: 'Apple ASC App ID'
+    default: 'alpha'
+  platform:
+    description: 'ios, android, or all'
     required: true
-  apple-team-id:
-    description: 'Apple team ID'
-    required: true
-  android-expo-deploy-key-path:
-    description: 'Path to the Expo deploy key'
-    required: true
+    default: 'all'
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "composite"
+  steps:
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait --auto-submit
+      if: '{{ github.event.inputs.releaseStage == "beta" || github.event.inputs.releaseStage == "production" }}'
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait
+      if: '{{ github.event.inputs.releaseStage == "alpha" }}'
