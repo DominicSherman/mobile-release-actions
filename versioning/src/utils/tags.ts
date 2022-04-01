@@ -27,7 +27,7 @@ interface GetNewTagProps {
 }
 
 /**
- * Bump tag based on version change typ
+ * Bump tag based on version change type
  * If there is a version bump, then reset the version number to 1
  * If there is not a version bump, then increment the version number
  */

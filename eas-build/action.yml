@@ -13,8 +13,8 @@ runs:
   using: "composite"
   steps:
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait --auto-submit
-      if: '{{ github.event.inputs.releaseStage == "beta" || github.event.inputs.releaseStage == "production" }}'
+      if: ${{ github.event.inputs.releaseStage == "beta" || github.event.inputs.releaseStage == "production" }}
       shell: bash
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait
-      if: '{{ github.event.inputs.releaseStage == "alpha" }}'
+      if: ${{ github.event.inputs.releaseStage == "alpha" }}
       shell: bash
