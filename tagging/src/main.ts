@@ -13,6 +13,7 @@ const main = async (): Promise<void> => {
   const versionChangeType = validateVersionChangeType(core.getInput('version-change-type'));
   const buildVersion = core.getInput('build-version') || '1';
   const githubTagging = core.getBooleanInput('github-tagging');
+  const createTag = core.getBooleanInput('create-tag');
 
   let currentVersion = DEFAULT_APP_VERSION,
     currentTag = '';
@@ -34,7 +35,7 @@ const main = async (): Promise<void> => {
     tag: newTag,
   });
 
-  if (githubTagging) {
+  if (githubTagging && createTag) {
     await createGithubTag({
       githubAuthToken,
       branchToTag,

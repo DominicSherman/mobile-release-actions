@@ -5,14 +5,14 @@ inputs:
     description: 'ios, android, or all'
     required: false
     default: 'all'
-  auto-submit:
-    description: 'flag for whether or not the build should be auto-submitted to app store/play store'
-    required: false
-    default: true
   expo-profile:
     description: 'expo profile to use for build'
     required: false
     default: 'production'
+  auto-submit:
+    description: 'flag for whether or not the build should be auto-submitted to app store/play store'
+    required: false
+    default: true
 
 runs:
   using: "composite"

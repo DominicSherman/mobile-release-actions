@@ -8,6 +8,10 @@ inputs:
   github-auth-token:
     description: 'A personal access token for the user that will be tagging and publishing the releases'
     required: false
+  create-tag:
+    description: 'Create a tag for the release in github'
+    required: false
+    default: true
   branch:
     description: 'The name of the branch the tag should be created off of'
     required: false
