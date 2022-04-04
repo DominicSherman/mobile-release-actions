@@ -27,7 +27,7 @@ export const createGithubTag = async ({
     (item) => `* ${item.commit.message} ${item.html_url} - @${item.author?.login || 'unknown'}`
   );
   // generate body for release
-  const body = `${commitMessages.join('\n ')}`;
+  const body = `Released from ${branchToTag}\n\n${commitMessages.join('\n ')}`;
 
   await octokit.rest.repos.createRelease({
     ...github.context.repo,
