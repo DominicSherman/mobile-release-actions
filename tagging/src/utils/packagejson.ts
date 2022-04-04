@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 /** Get version from package json */
 export const getPackageJsonVersion = () => {
-  const packageJson = require(`${process.env.GITHUB_WORKSPACE}}/package.json`);
+  const packageJson = require(`${process.env.GITHUB_WORKSPACE}/package.json`);
 
   if (!packageJson.version) {
     throw new Error('No version specified in package.json');
