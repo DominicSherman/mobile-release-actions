@@ -35,13 +35,15 @@ const main = async (): Promise<void> => {
     tag: newTag,
   });
 
-  if (githubTagging && createTag) {
-    await createGithubTag({
-      githubAuthToken,
-      branchToTag,
-      currentTag,
-      newTag,
-    });
+  if (githubTagging) {
+    if (createTag) {
+      await createGithubTag({
+        githubAuthToken,
+        branchToTag,
+        currentTag,
+        newTag,
+      });
+    }
   } else {
     await writePackageJsonVersion(getVersionFromTag(newTag));
   }

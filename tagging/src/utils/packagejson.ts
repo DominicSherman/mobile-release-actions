@@ -13,7 +13,7 @@ export const getPackageJsonVersion = () => {
 
 /** Write new version to package json */
 export const writePackageJsonVersion = async (newVersion: string) => {
-  const packageJson = require(`${process.env.GITHUB_WORKSPACE}}/package.json`);
+  const packageJson = require(`${process.env.GITHUB_WORKSPACE}/package.json`);
   const json = {
     ...packageJson,
   };
