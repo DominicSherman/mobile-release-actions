@@ -1,5 +1,5 @@
 import * as github from '@actions/github';
-
+import fetch from 'node-fetch';
 import { DEFAULT_APP_VERSION } from '../constants';
 
 interface CreateGithubTagProps {
@@ -11,20 +11,28 @@ interface CreateGithubTagProps {
 
 export const createGithubTag = async ({
   githubAuthToken,
+  branchToTag,
   currentTag,
   newTag,
 }: CreateGithubTagProps): Promise<void> => {
   const octokit = github.getOctokit(githubAuthToken);
 
-  const { data: releaseNotes } = await octokit.rest.repos.generateReleaseNotes({
+  const commitsResponse = await octokit.rest.repos.compareCommitsWithBasehead({
     ...github.context.repo,
-    tag_name: newTag,
-    previous_tag_name: currentTag,
+    basehead: `${currentTag}...${branchToTag}`,
   });
+  const commits = commitsResponse?.data?.commits || [];
+  // generate list of commit messages for release body
+  const commitMessages = commits.map(
+    (item) => `* ${item.commit.message} ${item.html_url} - @${item.author?.login || 'unknown'}`
+  );
+  // generate body for release
+  const body = `${commitMessages.join('\n ')}`;
+
   await octokit.rest.repos.createRelease({
     ...github.context.repo,
-    ...releaseNotes,
-    target_commitish: github.context.sha,
+    name: newTag,
+    body,
     tag_name: newTag,
   });
 };
