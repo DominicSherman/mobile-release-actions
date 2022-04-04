@@ -5,7 +5,7 @@ inputs:
     description: 'ios, android, or all'
     required: false
     default: 'all'
-  auto_submit:
+  auto-submit:
     description: 'flag for whether or not the build should be auto-submitted to app store/play store'
     required: false
     default: true
@@ -13,8 +13,8 @@ runs:
   using: "composite"
   steps:
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait --auto-submit
-      if: ${{ github.event.inputs.auto_submit == true }}
+      if: ${{ github.event.inputs.auto-submit == true }}
       shell: bash
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait
-      if: ${{ github.event.inputs.auto_submit != 'true' }}
+      if: ${{ github.event.inputs.auto-submit != 'true' }}
       shell: bash
