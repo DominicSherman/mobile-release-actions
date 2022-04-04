@@ -1,5 +1,4 @@
 import * as github from '@actions/github';
-import fetch from 'node-fetch';
 import { DEFAULT_APP_VERSION } from '../constants';
 
 interface CreateGithubTagProps {
