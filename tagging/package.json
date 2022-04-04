@@ -1,7 +1,7 @@
 {
   "name": "tagging",
   "version": "0.0.0",
-  "description": "An action for automating GitHub tagging for mobile releases",
+  "description": "An action for automating the version process for mobile applications",
   "main": "lib/src/main.js",
   "license": "MIT",
   "scripts": {

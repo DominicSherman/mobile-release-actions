@@ -11,11 +11,11 @@ inputs:
     default: ${{ github.token }}
   create-tag:
     description: 'Create a tag for the release in github'
-    required: false
+    required: true
     default: true
   branch:
     description: 'The name of the branch the tag should be created off of'
-    required: false
+    required: true
     default: 'main'
   version-change-type:
     description: 'Type of version change to make (major, minor, patch, none)'
