@@ -5,11 +5,11 @@ inputs:
     description: 'ios, android, or all'
     required: false
     default: 'all'
-  expo-profile:
+  profile:
     description: 'expo profile to use for build'
     required: false
     default: 'production'
-  auto-submit:
+  submit:
     description: 'flag for whether or not the build should be auto-submitted to app store/play store'
     required: false
     default: true
@@ -17,11 +17,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{github.event.inputs}}"
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.profile}} --non-interactive --no-wait --auto-submit
+      if: ${{ github.event.inputs.submit == true }}
       shell: bash
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.expo-profile}} --non-interactive --no-wait --auto-submit
-      if: ${{ github.event.inputs.auto-submit == true }}
-      shell: bash
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.expo-profile}} --non-interactive --no-wait
-      if: ${{ github.event.inputs.auto-submit != true }}
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.profile}} --non-interactive --no-wait
+      if: ${{ github.event.inputs.submit != true }}
       shell: bash
