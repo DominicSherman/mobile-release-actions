@@ -13,15 +13,16 @@
   },
   "dependencies": {
     "@actions/core": "^1.5.0",
+    "@actions/exec": "^1.1.1",
     "@actions/github": "^5.0.0",
-    "node-fetch": "^2.6.1",
     "lodash": "^4.17.21",
+    "node-fetch": "^2.6.1",
     "pbxproj-dom": "^1.2.0",
     "plist": "^3.0.5"
   },
   "devDependencies": {
-    "@types/node-fetch": "^2.6.1",
     "@types/lodash": "^4.14.181",
+    "@types/node-fetch": "^2.6.1",
     "@types/plist": "^3.0.2"
   }
 }

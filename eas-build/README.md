@@ -1,6 +1,6 @@
 # eas-build
 
-This action handles deploying your mobile app through EAS. It calls `eas build` with the `--auto-submit` flag to handle the deployment. 
+This action handles deploying your mobile app through [EAS](https://docs.expo.dev/eas/). It calls `eas build` with the `--auto-submit` flag to handle the deployment. 
 
 __You must [install EAS CLI](https://github.com/marketplace/actions/expo-github-action) in your workflow prior to using this action.__
 

@@ -50,11 +50,6 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Setup Git
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
       - name: Tagging
         id: tagging
         uses: echobind/mobile-release-actions/tagging@v1
