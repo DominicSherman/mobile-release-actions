@@ -9,12 +9,17 @@ inputs:
     description: 'flag for whether or not the build should be auto-submitted to app store/play store'
     required: false
     default: true
+  expo-profile:
+    description: 'expo profile to use for build'
+    required: false
+    default: 'production'
+
 runs:
   using: "composite"
   steps:
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait --auto-submit
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.expo-profile }} --non-interactive --no-wait --auto-submit
       if: ${{ github.event.inputs.auto-submit == true }}
       shell: bash
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait
+    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.expo-profile }} --non-interactive --no-wait
       if: ${{ github.event.inputs.auto-submit != 'true' }}
       shell: bash

@@ -8,18 +8,15 @@ const IOS_DIR = path.join(process.env.GITHUB_WORKSPACE || '', 'ios');
 const BUILD_GRADLE_PATH = path.join(process.env.GITHUB_WORKSPACE || '', 'android/app/build.gradle');
 
 interface WriteBuildAndAppVersionProps {
-  appVersion: string;
-  buildVersion: string;
+  tag: string;
 }
 
 /**
  * Write iOS and Android Build/App versions
  */
-export const writeBuildAndAppVersions = async ({
-  appVersion,
-  buildVersion: passedBuildVersion,
-}: WriteBuildAndAppVersionProps) => {
-  const buildVersion = Number(passedBuildVersion);
+export const writeBuildAndAppVersions = async ({ tag }: WriteBuildAndAppVersionProps) => {
+  const [appVersion, stringBuildVersion] = tag.split('-');
+  const buildVersion = Number(stringBuildVersion);
 
   await updateIOSVersions({ appVersion, buildVersion });
   await updateAndroidVersions({ appVersion, buildVersion });

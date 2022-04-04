@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { DEFAULT_APP_VERSION } from '../constants';
 
 interface CommitItem {
   commit: {
@@ -67,7 +68,7 @@ export const getMostRecentGithubTag = async (githubAuthToken: string): Promise<s
   const tagsData = await tagsResponse.json();
 
   // default if the repository doesn't have any tags created yet
-  let mostRecentTag = 'v0.0.1-0';
+  let mostRecentTag = `v${DEFAULT_APP_VERSION}-1`;
 
   if (tagsData && Array.isArray(tagsData) && tagsData[0] && tagsData[0].name) {
     // specify most recent tag if there are existing tags in the repo
@@ -77,7 +78,12 @@ export const getMostRecentGithubTag = async (githubAuthToken: string): Promise<s
   return mostRecentTag;
 };
 
-const getHeaders = (token: string) => ({
-  Accept: 'application/vnd.github.v3+json',
-  Authorization: `Bearer ${token}`,
-});
+const getHeaders = (token: string) => {
+  if (!token) {
+    throw new Error('Github auth token not specified');
+  }
+  return {
+    Accept: 'application/vnd.github.v3+json',
+    Authorization: `Bearer ${token}`,
+  };
+};

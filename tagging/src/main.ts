@@ -1,28 +1,49 @@
 import * as core from '@actions/core';
 
-import { createGithubTag } from './utils/github';
-import { getCurrentTag, getNewTag } from './utils/tags';
+import { DEFAULT_APP_VERSION } from './constants';
+import { createGithubTag, getMostRecentGithubTag } from './utils/github';
+import { writeBuildAndAppVersions } from './utils/native-versions';
+import { getPackageJsonVersion, writePackageJsonVersion } from './utils/packagejson';
+import { getNewTag, getVersionFromTag } from './utils/tags';
 import { validateVersionChangeType } from './utils/validation';
 
 const main = async (): Promise<void> => {
   const githubAuthToken = core.getInput('github-auth-token');
-  const branchToTag = core.getInput('branch-to-tag') || 'main';
+  const branchToTag = core.getInput('branch');
   const versionChangeType = validateVersionChangeType(core.getInput('version-change-type'));
   const buildVersion = core.getInput('build-version') || '1';
+  const githubTagging = core.getBooleanInput('github-tagging');
 
-  const currentTag = await getCurrentTag(githubAuthToken);
+  let currentVersion = DEFAULT_APP_VERSION,
+    currentTag = '';
+
+  if (githubTagging) {
+    currentTag = await getMostRecentGithubTag(githubAuthToken);
+    currentVersion = getVersionFromTag(currentTag);
+  } else {
+    currentVersion = getPackageJsonVersion();
+  }
+
   const newTag = getNewTag({
     buildVersion,
-    currentTag,
+    currentVersion,
     versionChangeType,
   });
 
-  await createGithubTag({
-    githubAuthToken,
-    branchToTag,
-    currentTag,
-    newTag,
+  await writeBuildAndAppVersions({
+    tag: newTag,
   });
+
+  if (githubTagging) {
+    await createGithubTag({
+      githubAuthToken,
+      branchToTag,
+      currentTag,
+      newTag,
+    });
+  } else {
+    await writePackageJsonVersion(getVersionFromTag(newTag));
+  }
 
   core.setOutput('tag', newTag);
 };

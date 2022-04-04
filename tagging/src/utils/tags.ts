@@ -4,7 +4,7 @@ import { getMostRecentGithubTag } from './github';
 // TAG - v1.0.0-1
 // VERSION - 1.0.0
 
-export const getCurrentTag = (githubAuthToken: string): Promise<string> => {
+export const getCurrentVersion = (githubAuthToken: string): Promise<string> => {
   // TODO pull from GitHub or app.json?
   return getMostRecentGithubTag(githubAuthToken);
 };
@@ -21,7 +21,7 @@ export const getVersionFromTag = (currentTag: string): string => {
 };
 
 interface GetNewTagProps {
-  currentTag: string;
+  currentVersion: string;
   buildVersion: string;
   versionChangeType: VersionChangeType;
 }
@@ -32,13 +32,11 @@ interface GetNewTagProps {
  * If there is not a version bump, then increment the version number
  */
 export const getNewTag = ({
-  currentTag,
+  currentVersion,
   versionChangeType,
   buildVersion,
 }: GetNewTagProps): string => {
-  const [tagVersion, _currentBuildVersion] = currentTag.split('-');
-  const cleanTag = tagVersion.replace('v', '');
-  const [major, minor, patch] = cleanTag.split('.');
+  const [major, minor, patch] = currentVersion.split('.');
 
   if (versionChangeType === 'major') {
     return `v${Number(major) + 1}.0.0-${buildVersion}`;
@@ -48,5 +46,5 @@ export const getNewTag = ({
     return `v${major}.${minor}.${Number(patch) + 1}-${buildVersion}`;
   }
 
-  return `v${cleanTag}-${buildVersion}`;
+  return `v${currentVersion}-${buildVersion}`;
 };

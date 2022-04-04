@@ -1,12 +1,16 @@
 name: 'React-Native tagging'
 description: 'An action for automating react native versions'
 inputs:
+  github-tagging:
+    description: 'Manage tags through GitHub'
+    required: false
+    default: true
   github-auth-token:
     description: 'A personal access token for the user that will be tagging and publishing the releases'
-    required: true
-  branch-to-tag:
+    required: false
+  branch:
     description: 'The name of the branch the tag should be created off of'
-    required: true
+    required: false
     default: 'main'
   version-change-type:
     description: 'Type of version change to make (major, minor, patch, none)'
