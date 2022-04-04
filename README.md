@@ -14,4 +14,4 @@ A monorepo of GitHub actions used for mobile releases.
 
 ## Contributing
 
-This repo uses [int128/release-typescript-action](https://github.com/int128/release-typescript-action) to automatically publish a new version.
+This repo uses [int128/release-typescript-action](https://github.com/int128/release-typescript-action) to automatically publish a new version on merge to main.
