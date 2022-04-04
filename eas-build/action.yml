@@ -17,9 +17,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.profile}} --non-interactive --no-wait --auto-submit
-      if: ${{ github.event.inputs.submit == true }}
+    - run: eas build --platform ${{inputs.platform}} --profile ${{inputs.profile}} --non-interactive --no-wait --auto-submit
+      if: ${{ inputs.submit == true }}
       shell: bash
-    - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.profile}} --non-interactive --no-wait
-      if: ${{ github.event.inputs.submit != true }}
+    - run: eas build --platform ${{inputs.platform}} --profile ${{inputs.profile}} --non-interactive --no-wait
+      if: ${{ inputs.submit != true }}
       shell: bash
