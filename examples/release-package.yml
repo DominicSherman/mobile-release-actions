@@ -1,0 +1,70 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      releaseStage:
+        type: choice
+        description: 'type of release'
+        required: true
+        default: 'beta'
+        options:
+          - alpha
+          - beta
+          - production
+      versionChangeType:
+        type: choice
+        description: 'type of version bump'
+        required: true
+        default: 'none'
+        options:
+          - major
+          - minor
+          - patch
+          - none
+      platform:
+        type: choice
+        description: 'platform to build for'
+        required: true
+        default: 'all'
+        options:
+          - all
+          - ios
+          - android
+      branch:
+        type: string
+        description: 'branch to build'
+        required: true
+        default: 'main'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Tagging
+        id: tagging
+        uses: echobind/mobile-release-actions/tagging@v1
+        with:
+          github-tagging: false
+          branch: ${{ github.event.inputs.branch }}
+          version-change-type: ${{ github.event.inputs.versionChangeType }}
+          build-version: ${{ github.run_number }}
+
+      - name: Install EAS CLI
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: 5.x
+          eas-version: latest
+          token: ${{ secrets.EXPO_CI_TOKEN }}
+
+      - name: Build
+        uses: echobind/mobile-release-actions/eas-build@v1
+        with:
+          platform: ${{ github.event.inputs.platform }}
+          profile: ${{ github.event.inputs.releaseStage }}
+          submit: ${{ github.event.inputs.releaseStage != 'alpha' }}
+      
