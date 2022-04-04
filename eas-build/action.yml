@@ -17,6 +17,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: echo "${{github.event.inputs}}"
+      shell: bash
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.expo-profile}} --non-interactive --no-wait --auto-submit
       if: ${{ github.event.inputs.auto-submit == true }}
       shell: bash
