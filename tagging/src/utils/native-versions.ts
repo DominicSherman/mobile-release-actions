@@ -15,7 +15,8 @@ interface WriteBuildAndAppVersionProps {
  * Write iOS and Android Build/App versions
  */
 export const writeBuildAndAppVersions = async ({ tag }: WriteBuildAndAppVersionProps) => {
-  const [appVersion, stringBuildVersion] = tag.split('-');
+  const [appVersionWithV, stringBuildVersion] = tag.split('-');
+  const appVersion = appVersionWithV.replace('v', '');
   const buildVersion = Number(stringBuildVersion);
 
   await updateIOSVersions({ appVersion, buildVersion });
