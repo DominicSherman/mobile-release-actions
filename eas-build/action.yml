@@ -1,20 +1,20 @@
 name: 'EAS Build'
 description: 'An action for handling logic when building with EAS'
 inputs:
-  release-stage:
-    description: 'alpha, beta or production release (alpha does not upload to TestFlight)'
-    required: true
-    default: 'alpha'
   platform:
     description: 'ios, android, or all'
-    required: true
+    required: false
     default: 'all'
+  auto_submit:
+    description: 'flag for whether or not the build should be auto-submitted to app store/play store'
+    required: false
+    default: true
 runs:
   using: "composite"
   steps:
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait --auto-submit
-      if: ${{ github.event.inputs.releaseStage == 'beta' || github.event.inputs.releaseStage == 'production' }}
+      if: ${{ github.event.inputs.auto_submit == true }}
       shell: bash
     - run: eas build --platform ${{github.event.inputs.platform}} --profile ${{ github.event.inputs.releaseStage }} --non-interactive --no-wait
-      if: ${{ github.event.inputs.releaseStage == 'alpha' }}
+      if: ${{ github.event.inputs.auto_submit != 'true' }}
       shell: bash
