@@ -3,15 +3,15 @@ description: 'An action for handling logic when building with EAS'
 inputs:
   platform:
     description: 'ios, android, or all'
-    required: false
+    required: true
     default: 'all'
   profile:
     description: 'expo profile to use for build'
-    required: false
+    required: true
     default: 'production'
   submit:
     description: 'flag for whether or not the build should be auto-submitted to app store/play store'
-    required: false
+    required: true
     default: true
 
 runs:

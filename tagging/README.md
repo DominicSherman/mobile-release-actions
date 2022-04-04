@@ -2,7 +2,7 @@
 
 This action automates the versioning process for mobile applications.
 
-* Automatically write native app versions and build versions (build number on iOS and version code on Android)
+* Automatically writes native app versions and build versions (build number on iOS and version code on Android)
 * Manage app version for both platforms through GitHub or `package.json`
 
 ```mermaid
@@ -27,14 +27,14 @@ flowchart TB
 
 ## Inputs
 
-| Name                  | Type      | Default        | Description                                                                                                                                                   |
-| --------------------- | --------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `github-tagging`      | `boolean` | `true`         | Whether to manage current version through tags on Github. If this is false, it will manage the current version using the version specified in `package.json`. |
-| `github-auth-token`   | `string`  | `github.token` | GitHub token                                                                                                                                                  |
-| `create-tag`          | `boolean` | `true`         | Whether to create the tag on GitHub. Useful if you want to build off of a branch to test but don't want to tag it.                                            |
-| `branch`              | `string`  | `main`         | Branch to create the tag off of.                                                                                                                              |
-| `version-change-type` | `string`  | `none`         | Type of version change to make (`major`, `minor`, `patch`, or `none`)                                                                                         |
-| `build-version`       | `string`  | `1`            | Build version (see [terminology](#terminology)). A good value for this is `github.run_number`.                                                                |
+| Name                  | Type                                 | Default        | Description                                                                                                                                                   |
+| --------------------- | ------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `github-tagging`      | `boolean`                            | `true`         | Whether to manage current version through tags on Github. If this is false, it will manage the current version using the version specified in `package.json`. |
+| `github-auth-token`   | `string`                             | `github.token` | GitHub token                                                                                                                                                  |
+| `create-tag`          | `boolean`                            | `true`         | Whether to create the tag on GitHub. Useful if you want to build off of a branch to test but don't want to tag it.                                            |
+| `branch`              | `string`                             | `main`         | Branch to create the tag off of.                                                                                                                              |
+| `version-change-type` | `major`, `minor`, `patch`, or `none` | `none`         | Type of version change to make                                                                                                                                |
+| `build-version`       | `string`                             | `1`            | Build version (see [terminology](#terminology)). A good value for this is `github.run_number`.                                                                |
 
 ## Terminology
 
