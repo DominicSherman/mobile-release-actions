@@ -7,7 +7,8 @@ inputs:
     default: true
   github-auth-token:
     description: 'A personal access token for the user that will be tagging and publishing the releases'
-    required: false
+    required: true
+    default: ${{ github.token }}
   create-tag:
     description: 'Create a tag for the release in github'
     required: false
