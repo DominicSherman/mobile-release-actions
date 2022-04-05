@@ -1,3 +1,5 @@
+Moved to [echobind/mobile-release-actions](https://github.com/echobind/mobile-release-actions)
+
 # mobile-release-actions
 
 A monorepo of GitHub actions used for mobile releases.
